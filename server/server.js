@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const { sequelize } = require('./models');
 const authRoutes = require('./routes/auth');
+const taskRoutes = require('./routes/task');
 
 require('dotenv').config();
 
@@ -12,6 +13,7 @@ app.use(bodyParser.json());
 
 // Routes
 app.use('/auth', authRoutes);
+app.use('/tasks', taskRoutes);
 
 // Test Database Connection
 sequelize.sync()
