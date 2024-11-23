@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const authRoute = require("./routes/auth")
+const authRoute = require("./routes/auth");
 const multer = require("multer");
 const cookieParser = require("cookie-parser");
 
@@ -13,6 +13,7 @@ app.use(express.json());
 app.use(
   cors({
     origin: "http://localhost:3000",
+    credentials: true  // Add this to allow credentials
   })
 );
 app.use(cookieParser());
@@ -32,6 +33,9 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
   const file = req.file;
   res.status(200).json(file.filename);
 });
+
+// Changed from /server/auth to /api/auth for consistency
+app.use("/api/auth", authRoute);
 
 app.listen(8800, () => {
   console.log("API working!");

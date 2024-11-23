@@ -7,3 +7,5 @@ router.post("/login", login);
 router.post("/register", register);
 router.post("/logout", logout);
 
+// Export just the router, not an object containing the router
+module.exports = router;
