@@ -1,14 +1,30 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const authRoutes = require('./auth');
-const taskRoutes = require('./tasks');
+import express from "express";
 const app = express();
+import authRoutes from "./routes/auth.js";
+import taksRoutes from "./routes/tasks.js";
+import cors from "cors";
+// import multer from "multer";
+import cookieParser from "cookie-parser";
 
-app.use(bodyParser.json());
 
-// Routes
-app.use('/auth', authRoutes);
-app.use('/api', taskRoutes);
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Credentials", true);
+  next();
+});
+app.use(express.json());
+app.use(
+  cors({
+    origin: "http://localhost:5000",
+  })
+);
+app.use(cookieParser());
 
-const PORT = 3000;
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+
+
+app.use("/api/auth", authRoutes);
+app.use("/api/tasks",taksRoutes)
+
+app.listen(5000, () => {
+  console.log("API working!");
+});
+
