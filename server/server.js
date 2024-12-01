@@ -14,7 +14,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:5000",
+    origin: "http://localhost:6000",
   })
 );
 app.use(cookieParser());
@@ -24,7 +24,7 @@ app.use(cookieParser());
 app.use("/api/auth", authRoutes);
 app.use("/api/tasks",taksRoutes)
 
-app.listen(5000, () => {
+app.listen(6000, () => {
   console.log("API working!");
 });
 
