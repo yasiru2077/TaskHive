@@ -3,6 +3,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 const app = express();
 import authRoutes from "./routes/auth.js";
+import tasksRoutes from "./routes/tasks.js";
 
 const port = 5000;
 
@@ -22,6 +23,7 @@ app.use(
 app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);
+app.use("/api/tasks", tasksRoutes);
 
 app.listen(port, () => {
   console.log(`api working on port ${port}`);
