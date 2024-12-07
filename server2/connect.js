@@ -4,6 +4,6 @@ export const db = mysql2.createConnection({
   host: "localhost",
   user: "root",
   password: "faydro",
-  database: "task_manager",
+  database: "artelierspace",
   port: 3308,
 });
