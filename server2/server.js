@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth.js";
+import artWorkRoutes from "./routes/portfolio.js";
 const app = express();
 
 const port = 8000;
@@ -22,6 +23,7 @@ app.use(
 app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);
+app.use("/api/artworks", artWorkRoutes);
 
 app.listen(port, () => {
   console.log(`API working in ${port}`);
