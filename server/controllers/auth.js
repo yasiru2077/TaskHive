@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 export const register = (req, res) => {
+  
   //CHECK USER IF EXISTS
 
   const q = "SELECT * FROM users WHERE username = ?";
