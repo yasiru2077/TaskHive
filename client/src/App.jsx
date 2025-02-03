@@ -4,11 +4,10 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
 
   return (
     <>
-      <h1>fhaghfafafaf</h1>
+      <h1 className="title">ahjgfakafaaf jalfjalafai afajfja ikhkhkgtydfay</h1>
       <p>
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi minima
         rem atque dolores impedit ullam excepturi in aspernatur laudantium

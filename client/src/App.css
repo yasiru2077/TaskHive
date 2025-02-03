@@ -12,10 +12,14 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: "Caveat", serif;
 }
 
-h1{
-  font-family: "Raleway", serif;
-  
+.title {
+  font-family: "Caveat", serif;
+  /* font-family: "Shadows Into Light", serif; */
+  font-weight: 700;
+}
+
+p {
+  font-family: "Caveat", serif;
 }
