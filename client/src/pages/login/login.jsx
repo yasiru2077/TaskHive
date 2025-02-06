@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [inputs, setInputs] = useState({
@@ -8,47 +9,51 @@ function Login() {
   });
 
   const [err, setErr] = useState(null);
-
-  const navigate = useState(null);
+  const navigate = useNavigate(); // Corrected useNavigate hook
 
   const handleChange = (e) => {
     setInputs((prev) => ({
       ...prev,
-      [e.target.name]: e.target,
+      [e.target.name]: e.target.value, // Fixed the incorrect value assignment
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("/auth/login", inputs);
-      navigate("/");
+      await axios.post("http://localhost:5000/api/auth/login", inputs, {
+        withCredentials: true,
+      });
+      navigate("/"); // Redirect after successful login
     } catch (err) {
-      setErr(err.response.data);
+      setErr(err.response?.data || "An error occurred"); // Improved error handling
     }
   };
 
-  return <div>
- <div>
+  return (
+    <div className="login-container">
       <form onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Username"
           name="username"
+          value={inputs.username}
           onChange={handleChange}
+          required
         />
         <input
           type="password"
           placeholder="Password"
           name="password"
+          value={inputs.password}
           onChange={handleChange}
+          required
         />
         <button type="submit">Login</button>
-        {err && <p>{err}</p>}
+        {err && <p className="error">{err}</p>}
       </form>
     </div>
-
-  </div>;
+  );
 }
 
 export default Login;

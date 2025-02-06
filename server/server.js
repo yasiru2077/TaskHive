@@ -6,7 +6,7 @@ import cors from "cors";
 // import multer from "multer";
 import cookieParser from "cookie-parser";
 
-const port = 6000;
+const port = 5000;
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Credentials", true);
@@ -15,7 +15,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(
   cors({
-    origin: `http://localhost:${port}`,
+    origin: `http://localhost:5173`,
   })
 );
 app.use(cookieParser());
@@ -23,6 +23,6 @@ app.use(cookieParser());
 app.use("/api/auth", authRoutes);
 app.use("/api/tasks", tasksRoutes);
 
-app.listen(6000, () => {
+app.listen(port, () => {
   console.log(`API working on ${port}`);
 });
