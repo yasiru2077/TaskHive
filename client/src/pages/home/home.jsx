@@ -1,9 +1,24 @@
-import React from 'react'
+import React, { useEffect, useState } from "react";
 
-function Home() {
+function Home({ isAuthenticated }) {
+  console.log("jfosjofjos", isAuthenticated);
+
+  const [x, setx] = useState("");
+
+  useEffect(() => {
+    if (isAuthenticated === true) {
+      setx("gshgshgks");
+    }
+  }, [isAuthenticated]);
+
   return (
-    <div>Home</div>
-  )
+    <div>
+      <div>Home</div>
+      <ol>
+        <li>{x}</li>
+      </ol>
+    </div>
+  );
 }
 
-export default Home
+export default Home;

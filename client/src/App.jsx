@@ -1,4 +1,4 @@
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
@@ -20,17 +20,29 @@ const ProtectedRoute = ({ isAuthenticated }) => {
 };
 
 function App() {
-  const isAuthenticated = true;
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    () => localStorage.getItem("isAuthenticated") === "true"
+  );
+
+  useEffect(() => {
+    localStorage.setItem("isAuthenticated", isAuthenticated ? "true" : "false");
+  }, [isAuthenticated]);
 
   return (
     <Router>
       <Routes>
         <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/login"
+          element={<Login setIsAuthenticated={setIsAuthenticated} />}
+        />
 
         <Route element={<ProtectedRoute isAuthenticated={isAuthenticated} />}>
-          <Route element={<Layout />}>
-            <Route path="/" element={<Home />} />
+          <Route element={<Layout setIsAuthenticated={setIsAuthenticated} />}>
+            <Route
+              path="/"
+              element={<Home isAuthenticated={isAuthenticated} />}
+            />
           </Route>
         </Route>
 

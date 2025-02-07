@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function Login() {
+function Login({ setIsAuthenticated }) {
   const [inputs, setInputs] = useState({
     username: "",
     password: "",
@@ -24,6 +24,11 @@ function Login() {
       await axios.post("http://localhost:5000/api/auth/login", inputs, {
         withCredentials: true,
       });
+
+      setIsAuthenticated(true);
+      localStorage.setItem("isAuthenticated", "true");
+      
+
       navigate("/"); // Redirect after successful login
     } catch (err) {
       setErr(err.response?.data || "An error occurred"); // Improved error handling
