@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./notes-container.css";
 import UpdateContainer from "../update-container/update-container";
+import DeleteContainer from "../delete-container/delete-container";
 
 function NotesContainer() {
   const [notes, setNotes] = useState([]);
@@ -32,7 +33,10 @@ function NotesContainer() {
         }
 
         const data = await response.json();
-        setNotes(data);
+        // setNotes(data);
+        setNotes(
+          data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+        );
       } catch (err) {
         setError(err);
         console.error("Error fetching notes:", err);
@@ -42,7 +46,7 @@ function NotesContainer() {
     };
 
     fetchNotes();
-  }, [notes,selectedNote]);
+  }, [notes, selectedNote]);
 
   if (loading) {
     return <div>Loading notes...</div>;
@@ -51,8 +55,6 @@ function NotesContainer() {
   if (error) {
     return <div>Error: {error.message}</div>;
   }
-
-
 
   return (
     <div>
@@ -64,10 +66,11 @@ function NotesContainer() {
               <p>{selectedNote.description}</p>
               <p>{selectedNote.status}</p>
               <button onClick={closeModal}>x</button>
-              <button>
-                delete
-              </button>
-              <UpdateContainer openModel={openModel} setOpenModel={setOpenModel} selectedNote={selectedNote} />
+              <DeleteContainer
+                selectedNote={selectedNote}
+                setOpenModel={setOpenModel}
+              />
+              <UpdateContainer selectedNote={selectedNote} />
             </div>
           </div>
         )}
@@ -82,6 +85,7 @@ function NotesContainer() {
             <h3>{note.title}</h3>
             <p>{note.description}</p>
             <p>{note.status}</p>
+            <p>{note.created_at}</p>
           </div>
         ))}
       </div>

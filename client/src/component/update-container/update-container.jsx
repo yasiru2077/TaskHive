@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import "./update-container.css";
 
-function UpdateContainer({ selectedNote, onUpdate,openModel, setOpenModel }) {
+function UpdateContainer({ selectedNote, onUpdate }) {
   const [title, setTitle] = useState(selectedNote.title);
   const [description, setDescription] = useState(selectedNote.description);
   const [status, setStatus] = useState(selectedNote.status);
-//   const [openModel, setOpenModel] = useState(false);
+  const [openModel, setOpenModel] = useState(false);
 
   const handleUpdate = async () => {
     try {
@@ -27,6 +27,7 @@ function UpdateContainer({ selectedNote, onUpdate,openModel, setOpenModel }) {
 
       const result = await response.json();
       console.log(result);
+
       setOpenModel(false);
       onUpdate(); // Refresh notes after update
     } catch (error) {
@@ -35,7 +36,7 @@ function UpdateContainer({ selectedNote, onUpdate,openModel, setOpenModel }) {
   };
 
   const handleModel = () => {
-    setOpenModel(true);
+    setOpenModel(!openModel);
   };
 
   return (
@@ -64,6 +65,7 @@ function UpdateContainer({ selectedNote, onUpdate,openModel, setOpenModel }) {
             <option value="completed">Completed</option>
           </select>
           <button onClick={handleUpdate}>Update</button>
+          <button onClick={handleUpdate}>x</button>
         </div>
       )}
     </React.Fragment>
