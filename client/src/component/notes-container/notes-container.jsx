@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./notes-container.css";
 import UpdateContainer from "../update-container/update-container";
 import DeleteContainer from "../delete-container/delete-container";
+import { useNavigate } from "react-router-dom";
 
 function NotesContainer() {
   const [notes, setNotes] = useState([]);
@@ -9,6 +10,8 @@ function NotesContainer() {
   const [error, setError] = useState(null);
   const [openModel, setOpenModel] = useState(false);
   const [selectedNote, setSelectedNote] = useState(null);
+
+  const navigate = useNavigate();
 
   const modelHandle = (note) => {
     setSelectedNote(note);
@@ -27,6 +30,10 @@ function NotesContainer() {
           method: "GET",
           credentials: "include", // Include cookies in the request
         });
+
+        if (response.status === 401) {
+          navigate("/login")
+        }
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);

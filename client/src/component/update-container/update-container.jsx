@@ -26,6 +26,7 @@ function UpdateContainer({ selectedNote, onUpdate }) {
       }
 
       const result = await response.json();
+      
       console.log(result);
 
       setOpenModel(false);
@@ -59,11 +60,11 @@ function UpdateContainer({ selectedNote, onUpdate }) {
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Description"
           ></textarea>
-          <select value={status} onChange={(e) => setStatus(e.target.value)}>
+          {/* <select value={status} onChange={(e) => setStatus(e.target.value)}>
             <option value="pending">Pending</option>
             <option value="in-progress">In Progress</option>
             <option value="completed">Completed</option>
-          </select>
+          </select> */}
           <button onClick={handleUpdate}>Update</button>
           <button onClick={handleUpdate}>x</button>
         </div>
